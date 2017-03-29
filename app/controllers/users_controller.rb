@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only:  :destroy
 
-  def send_reset_password_instructions
+  def generate_new_password_email
     user = User.find(params[:id])
     user.send_reset_password_instructions
     flash[:notice] = "Reset password instrutctions have been sent to #{user.email}."
