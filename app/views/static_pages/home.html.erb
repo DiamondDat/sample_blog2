@@ -1,2 +1,12 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<div class="center jumbotron">
+  <h1>Devise Sample Blog</h1>
+  <h2>
+  This is the homepage for the
+  <a href="https://github.com/plataformatec/devise">Devise Sample Blog</a>
+  </h2>
+
+  <%= link_to "Sign Up Now", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+</div>
+
+<%= link_to image_tag('devise.png', alt: "Devise Logo"), "https://github.com/plataformatec/devise" %>
+

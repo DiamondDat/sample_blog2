@@ -12,13 +12,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def generate_new_password_email
-    user = User.find(params[:id])
-    user.send_reset_password_instructions
-    flash[:notice] = "Reset password instrutctions have been sent to #{user.email}."
-    redirect_to user_path(user)
-  end
-
   private
   # Confirms the correct user.
   def correct_user
