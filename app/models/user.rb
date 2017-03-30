@@ -3,9 +3,15 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
+  has_many  :microposts, dependent: :destroy
   validates :name,  presence: true, length: { minimum: 5, maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 },
                     uniqueness: { case_sensitvie: false }
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validates :password, presence: true, length: { minimum: 6 }, allow_blank: true
 
+  # Defines a proto-feed.
+  def feed
+    Micropost.where("user_id = ?", id)
+  end
 end
+
