@@ -1,0 +1,7 @@
+<%= form_for [micropost, Comment.new] do |f| %>
+  <div class="form-group">
+    <%= render 'shared/error_messages', object: f.object %>
+    <%= f.textare :content, placeholder: 'Comment....' %>
+  </div>
+  <%= f.submit "Add Comment", class: "btn btn-primary btn-sm" %>
+<% end %>
