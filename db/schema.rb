@@ -13,13 +13,12 @@
 ActiveRecord::Schema.define(version: 20170330092143) do
 
   create_table "microposts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id",                  null: false, unsigned: true
     t.text     "content",    limit: 65535
-    t.integer  "user_id"
     t.string   "picture"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.index ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at", using: :btree
-    t.index ["user_id"], name: "index_microposts_on_user_id", using: :btree
   end
 
   create_table "relationships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -56,5 +55,4 @@ ActiveRecord::Schema.define(version: 20170330092143) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "microposts", "users"
 end
