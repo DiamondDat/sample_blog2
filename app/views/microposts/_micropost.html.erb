@@ -18,7 +18,11 @@
   </span>
   <span>
     <h3>Comments</h3>
-    <%= render(partial: 'comments/comment', collection: micropost.comments) %>
-    <%= render 'comments/comment', micropost: micropost %>
+    <section>
+      <%= render partial: 'comments/comment', collection: micropost.comments %>
+    </section>
+    <section>
+      <%= render 'comments/form', micropost: micropost %>
+    </section>
   </span>
 </li>

@@ -1,12 +1,10 @@
 <% if like = current_user.likes.find_by(micropost_id: micropost.id) %>
-  <%= form_for like, html: { method: :delete },
+  <%= form_for [like.micropost, like], html: { method: :delete },
                 remote: true do |f| %>
     <%= f.submit "Liked", class: "btn btn-primary" %>
   <% end %>
 <% else %>
-  <%= form_for current_user.likes.create(micropost_id: micropost.id), remote: true do |f| %>
-    <%= f.hidden_field :micropost_id %>
-    <%= f.hidden_field :user_id %>
+  <%= form_for [micropost, Like.new], remote: true do |f| %>
     <%= f.submit "Like", class: "btn btn-primary" %>
   <% end %>
 <% end %>

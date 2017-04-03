@@ -1,7 +1,7 @@
 class LikesController < ApplicationController
   def create
     @micropost = Micropost.find(params[:id])
-    @like = @micropost.likes.create(params[:like])
+    @like = @micropost.likes.create(user_id: current_user.id)
     respond_to do |format|
       format.html { redirect_to @user }
       format.js

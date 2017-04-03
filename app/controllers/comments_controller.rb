@@ -7,6 +7,9 @@ class CommentsController < ApplicationController
     @comment = params[:micropost_id] ? @commentable.comments.create(comment_params)
                                      : @commentable.replies.create(comment_params)
 
+    # Add user directly to comment
+    @comment.user = current_user
+
     if @comment.save
       flash[:success] = "Comment created."
       redirect_to request.referer || root_path
@@ -15,13 +18,16 @@ class CommentsController < ApplicationController
     end
   end
 
-  def destroy
 
+  def destroy
+    @comment = Comment.find(params[:id]).destroy
+    flash[:success] = "Comment removed."
+    redirect_to request.referer || root_path
   end
 
   private
   def comment_params
-    params.require(:comment).permit(:content).merge(user_id: current_user.id)
+    params.require(:comment).permit(:content)
   end
 
   def correct_user
@@ -30,7 +36,7 @@ class CommentsController < ApplicationController
   end
 
   def find_commentable
-    @commentable = params[:micropost_id] ? Micropost.find(params[:micorpost_id])
+    @commentable = params[:micropost_id] ? Micropost.find(params[:micropost_id])
                                          : Comment.find(params[:comment_id])
   end
 end
