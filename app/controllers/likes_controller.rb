@@ -1,18 +1,17 @@
 class LikesController < ApplicationController
   def create
-    @micropost = Micropost.find(params[:id])
+    @micropost = Micropost.find(params[:micropost_id])
     @like = @micropost.likes.create(user_id: current_user.id)
     respond_to do |format|
-      format.html { redirect_to @user }
+      format.html { redirect_to request.referer }
       format.js
     end
   end
 
   def destroy
-    like = Like.find(params[:id]).destroy
-    @micropost = like.micropost
+    @like = Like.find(params[:id]).destroy
     respond_to do |format|
-      format.html { redirect_to @user }
+      format.html { redirect_to request.referer }
       format.js
     end
   end

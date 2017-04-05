@@ -5,11 +5,12 @@
       <%= comment.content %>
       <div>
         <%= link_to "Delete Comment", [comment.micropost, comment],
+                                      remote: true,
                                       method: :delete,
                                       data: { confirm: "Are u sure?" } %>
       </div>
 
-      <%= form_for [comment, Comment.new] do |f| %>
+      <%= form_for([comment, Comment.new], remote: true) do |f| %>
         <%= f.text_area :content, placeholder: "Reply...." %>
         <%= f.submit "Reply", class: "btn btn-primary btn-sm"%>
       <% end %>
