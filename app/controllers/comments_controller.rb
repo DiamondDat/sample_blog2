@@ -10,11 +10,20 @@ class CommentsController < ApplicationController
     # Add user directly to comment
     @comment.user = current_user
 
-    if @comment.save
-      flash[:success] = "Comment created."
-      redirect_to request.referer || root_path
-    else
-      redirect_to request.referer || root_path
+    # if @comment.save
+    #   flash[:success] = "Comment created."
+    #   redirect_to request.referer || root_path
+    # else
+    #   redirect_to request.referer || root_path
+    # end
+
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to request.referer || root_path, notice: "Comment created." }
+        format.js
+      else
+        format.html { redirect_to request.referer || root_path }
+      end
     end
   end
 

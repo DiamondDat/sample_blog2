@@ -12,13 +12,15 @@
                                        data: { confirm: "Are u sure?" } %>
     <% end %>
   </span>
-  <span>
+  <span id="like-stats">
     <strong><%= pluralize(micropost.likes.count, 'user') %></strong> like this
+  </span>
+  <span id="like">
     <%= render 'likes/like_button', micropost: micropost %>
   </span>
   <span>
     <h3>Comments</h3>
-    <section>
+    <section id="comment">
       <%= render partial: 'comments/comment', collection: micropost.comments %>
     </section>
     <section>

@@ -1,1 +1,2 @@
-$("#like").html("<%= escape_javascript(render ('like_button')) %>");
+$("#like").html("<%= escape_javascript(render ('like_button'), micropost: @micropost) %>");
+$("#like-stats").html("<strong><%= pluralize(@micropost.likes.count, 'user') %></strong> like this")
